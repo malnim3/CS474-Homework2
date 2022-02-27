@@ -1,0 +1,29 @@
+[debug] > Exec(compile, None, None)
+[debug] Evaluating tasks: Compile / compile
+[debug] Running task... Cancel: Signal, check cycles: false, forcegc: true
+[info] compiling 1 Scala source to C:\Users\haytr\untitled3\target\scala-3.0.0\classes ...
+[warn] -- [E029] Pattern Match Exhaustivity Warning: C:\Users\haytr\untitled3\src\main\scala\MySetTheoryLang.scala:36:6 
+[warn] 36 |      this match {
+[warn]    |      ^^^^
+[warn]    |match may not be exhaustive.
+[warn]    |
+[warn]    |It would fail on pattern case: ArithExp.Cartesian(_, _), ArithExp.Assign(_, _), ArithExp.Check(_, _), ArithExp.Macro(_, _), ArithExp.Scope(_, _), ArithExp.ScopeAnon(_)
+[warn] -- [E029] Pattern Match Exhaustivity Warning: C:\Users\haytr\untitled3\src\main\scala\MySetTheoryLang.scala:66:6 
+[warn] 66 |      this match{
+[warn]    |      ^^^^
+[warn]    |match may not be exhaustive.
+[warn]    |
+[warn]    |It would fail on pattern case: ArithExp.Value(_), ArithExp.Value2(_), ArithExp.Value3(_), ArithExp.Value4(_), ArithExp.Value5(_), ArithExp.Value6(_)
+[warn]    |(More unmatched cases are elided)
+[warn] -- [E029] Pattern Match Exhaustivity Warning: C:\Users\haytr\untitled3\src\main\scala\MySetTheoryLang.scala:104:6 
+[warn] 104 |      this match{
+[warn]     |      ^^^^
+[warn]     |match may not be exhaustive.
+[warn]     |
+[warn]     |It would fail on pattern case: ArithExp.Value(_), ArithExp.Value2(_), ArithExp.Value3(_), ArithExp.Value4(_), ArithExp.Value5(_), ArithExp.Value6(_)
+[warn]     |(More unmatched cases are elided)
+[warn] three warnings found
+[warn] three warnings found
+[info] done compiling
+[success] Total time: 6 s, completed Feb 10, 2022, 10:23:48 PM
+[debug] > Exec(idea-shell, None, None)

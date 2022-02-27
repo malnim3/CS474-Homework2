@@ -1,0 +1,28 @@
+[debug] > Exec({file:/C:/Users/haytr/untitled3/}root/ testOnly YourSetTheoryLanguageTest, None, None)
+[debug] Evaluating tasks: Test / testOnly
+[debug] Running task... Cancel: Signal, check cycles: false, forcegc: true
+[info] compiling 1 Scala source to C:\Users\haytr\untitled3\target\scala-3.0.0\test-classes ...
+[info] done compiling
+[info] Suite Starting - YourSetTheoryLanguageTest
+[info] Scope Opened - YourSetTheoryLanguageTest: my first language for set theory operations
+[info] Test Starting - YourSetTheoryLanguageTest: my first language for set theory operations should create a set and insert objects into it
+[info] Test Succeeded - YourSetTheoryLanguageTest: my first language for set theory operations should create a set and insert objects into it (16 milliseconds)
+[info] Test Starting - YourSetTheoryLanguageTest: my first language for set theory operations should create assign binding
+[info] Test Succeeded - YourSetTheoryLanguageTest: my first language for set theory operations should create assign binding (2 milliseconds)
+[info] Test Starting - YourSetTheoryLanguageTest: my first language for set theory operations should create macro binding
+[info] Test Succeeded - YourSetTheoryLanguageTest: my first language for set theory operations should create macro binding (2 milliseconds)
+[info] Test Starting - YourSetTheoryLanguageTest: my first language for set theory operations should create named scope binding
+[info] Test Succeeded - YourSetTheoryLanguageTest: my first language for set theory operations should create named scope binding (1 millisecond)
+[info] Test Starting - YourSetTheoryLanguageTest: my first language for set theory operations should create anon scope binding
+[info] Test Succeeded - YourSetTheoryLanguageTest: my first language for set theory operations should create anon scope binding (3 milliseconds)
+[info] Scope Closed - YourSetTheoryLanguageTest: my first language for set theory operations
+[info] Suite Completed - YourSetTheoryLanguageTest (74 milliseconds)
+[info] Run completed in 186 milliseconds.
+[info] Total number of tests run: 5
+[info] Suites: completed 1, aborted 0
+[info] Tests: succeeded 5, failed 0, canceled 0, ignored 0, pending 0
+[info] All tests passed.
+[success] Total time: 1 s, completed Feb 11, 2022, 4:44:45 PM
+[debug] > Exec(idea-shell, None, None)
+[debug] > Exec(, None, None)
+[debug] > Exec(idea-shell, None, None)

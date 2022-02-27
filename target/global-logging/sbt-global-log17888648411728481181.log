@@ -1,0 +1,25 @@
+[debug] > Exec(test, None, None)
+[debug] Evaluating tasks: Test / test
+[debug] Running task... Cancel: Signal, check cycles: false, forcegc: true
+[info] compiling 1 Scala source to C:\Users\haytr\untitled3\target\scala-3.0.0\test-classes ...
+[info] done compiling
+[info] MyClassTest:
+[info] my first language for set theory operations
+[info] - should testing ClassCall with string intersect0
+[info] - should testing ClassCall with string intersect1
+[info] - should testing ClassCallBool with string intersect0
+[info] - should testing ClassCallBool with string intersect1
+[info] YourSetTheoryLanguageTest:
+[info] my first language for set theory operations
+[info] - should create a set and insert objects into it
+[info] - should create assign binding
+[info] - should create macro binding
+[info] - should create named scope binding
+[info] - should create anon scope binding
+[info] Run completed in 187 milliseconds.
+[info] Total number of tests run: 9
+[info] Suites: completed 2, aborted 0
+[info] Tests: succeeded 9, failed 0, canceled 0, ignored 0, pending 0
+[info] All tests passed.
+[success] Total time: 1 s, completed Feb 26, 2022, 9:30:06 PM
+[debug] > Exec(idea-shell, None, None)

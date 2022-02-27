@@ -1,0 +1,11 @@
+[debug] > Exec(test-only MyClassTest.scala.*, None, None)
+[error] Expected ID character
+[error] Not a valid command: test-only
+[error] Expected project ID
+[error] Expected configuration
+[error] Expected ':'
+[error] Expected key
+[error] Not a valid key: test-only (similar: testOnly, test, testOptions)
+[error] test-only MyClassTest.scala.*
+[error]          ^
+[debug] > Exec(idea-shell, None, None)

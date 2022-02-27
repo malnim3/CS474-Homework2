@@ -1,0 +1,15 @@
+[debug] > Exec(set parallelExecution.in(ProjectRef(uri("file:/C:/Users/haytr/untitled3/"), "root")) in Test:=true, None, None)
+[info] Defining Test / parallelExecution
+[info] The new value will be used by Test / test / testExecution, Test / testOnly / testExecution, Test / testQuick / testExecution
+[debug] Defining 
+[debug] 	Test / parallelExecution
+[debug] 
+[debug] The new value will be used by 
+[debug] 	Test / test / testExecution
+[debug] 	Test / testOnly / testExecution
+[debug] 	Test / testQuick / testExecution
+[info] Reapplying settings...
+[info] set current project to untitled3 (in build file:/C:/Users/haytr/untitled3/)
+[debug] > Exec(idea-shell, None, None)
+[debug] > Exec(, None, None)
+[debug] > Exec(idea-shell, None, None)

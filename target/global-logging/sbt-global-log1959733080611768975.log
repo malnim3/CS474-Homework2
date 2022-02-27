@@ -1,0 +1,35 @@
+[debug] > Exec(compile, None, None)
+[warn] build source files have changed
+[warn] modified files: 
+[warn]   C:\Users\haytr\untitled3\build.sbt
+[warn] Apply these changes by running `reload`.
+[warn] Automatically reload the build when source changes are detected by setting `Global / onChangedBuildSource := ReloadOnSourceChanges`.
+[warn] Disable this warning by setting `Global / onChangedBuildSource := IgnoreSourceChanges`.
+[debug] Evaluating tasks: Compile / compile
+[debug] Running task... Cancel: Signal, check cycles: false, forcegc: true
+[info] compiling 1 Scala source to C:\Users\haytr\untitled3\target\scala-3.1.1\classes ...
+[warn] -- [E029] Pattern Match Exhaustivity Warning: C:\Users\haytr\untitled3\src\main\scala\MySetTheoryLang.scala:36:6 
+[warn] 36 |      this match {
+[warn]    |      ^^^^
+[warn]    |match may not be exhaustive.
+[warn]    |
+[warn]    |It would fail on pattern case: ArithExp.Cartesian(_, _), ArithExp.Assign(_, _), ArithExp.Check(_, _), ArithExp.Macro(_, _), ArithExp.Scope(_, _), ArithExp.ScopeAnon(_)
+[warn] -- [E029] Pattern Match Exhaustivity Warning: C:\Users\haytr\untitled3\src\main\scala\MySetTheoryLang.scala:66:6 
+[warn] 66 |      this match{
+[warn]    |      ^^^^
+[warn]    |match may not be exhaustive.
+[warn]    |
+[warn]    |It would fail on pattern case: ArithExp.Value(_), ArithExp.Value2(_), ArithExp.Value3(_), ArithExp.Value4(_), ArithExp.Value5(_), ArithExp.Value6(_)
+[warn]    |(More unmatched cases are elided)
+[warn] -- [E029] Pattern Match Exhaustivity Warning: C:\Users\haytr\untitled3\src\main\scala\MySetTheoryLang.scala:104:6 
+[warn] 104 |      this match{
+[warn]     |      ^^^^
+[warn]     |match may not be exhaustive.
+[warn]     |
+[warn]     |It would fail on pattern case: ArithExp.Value(_), ArithExp.Value2(_), ArithExp.Value3(_), ArithExp.Value4(_), ArithExp.Value5(_), ArithExp.Value6(_)
+[warn]     |(More unmatched cases are elided)
+[warn] three warnings found
+[warn] three warnings found
+[info] done compiling
+[success] Total time: 1 s, completed Feb 10, 2022, 10:20:37 PM
+[debug] > Exec(idea-shell, None, None)

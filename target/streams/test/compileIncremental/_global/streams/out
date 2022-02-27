@@ -1,0 +1,38 @@
+[debug] [zinc] IncrementalCompile -----------
+[debug] IncrementalCompile.incrementalCompile
+[debug] previous = Stamps for: 2 products, 2 sources, 7 libraries
+[debug] current source = Set(${BASE}/src/test/scala/MyClassTest.scala, ${BASE}/src/test/scala/MySetTheoryLangTest.scala)
+[debug] > initialChanges = InitialChanges(Changes(added = Set(), removed = Set(), changed = Set(${BASE}/src/test/scala/MyClassTest.scala), unmodified = ...),Set(${BASE}/target/scala-3.0.0/test-classes/MyClassTest.class),Set(),API Changes: Set())
+[debug] 
+[debug] Initial source changes:
+[debug] 	removed: Set()
+[debug] 	added: Set()
+[debug] 	modified: Set(${BASE}/src/test/scala/MyClassTest.scala)
+[debug] Invalidated products: Set(${BASE}/target/scala-3.0.0/test-classes/MyClassTest.class)
+[debug] External API changes: API Changes: Set()
+[debug] Modified binary dependencies: Set()
+[debug] Initial directly invalidated classes: Set(MyClassTest)
+[debug] Sources indirectly invalidated by:
+[debug] 	product: Set(${BASE}/src/test/scala/MyClassTest.scala)
+[debug] 	binary dep: Set()
+[debug] 	external source: Set()
+[debug] All initially invalidated classes: Set(MyClassTest)
+[debug] All initially invalidated sources:Set(${BASE}/src/test/scala/MyClassTest.scala)
+[debug] Initial set of included nodes: MyClassTest
+[debug] compilation cycle 1
+[info] compiling 1 Scala source to C:\Users\haytr\untitled3\target\scala-3.0.0\test-classes ...
+[debug] Returning already retrieved and compiled bridge: C:\Users\haytr\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scala-lang\scala3-sbt-bridge\3.0.0\scala3-sbt-bridge-3.0.0.jar.
+[debug] [zinc] Running cached compiler 3bbe1456 for Scala Compiler version 3.0.0
+[debug] [zinc] The Scala compiler is invoked with:
+[debug] 	-bootclasspath
+[debug] 	C:\Users\haytr\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scala-lang\scala3-library_3\3.0.0\scala3-library_3-3.0.0.jar;C:\Users\haytr\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scala-lang\scala-library\2.13.5\scala-library-2.13.5.jar
+[debug] 	-classpath
+[debug] 	C:\Users\haytr\untitled3\target\scala-3.0.0\test-classes;C:\Users\haytr\untitled3\target\scala-3.0.0\classes;C:\Users\haytr\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scala-lang\scala3-library_3\3.0.2\scala3-library_3-3.0.2.jar;C:\Users\haytr\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scalactic\scalactic_3\3.2.11\scalactic_3-3.2.11.jar;C:\Users\haytr\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scalatest\scalatest_3\3.2.11\scalatest_3-3.2.11.jar;C:\Users\haytr\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scalatest\scalatest-core_3\3.2.11\scalatest-core_3-3.2.11.jar;C:\Users\haytr\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scalatest\scalatest-featurespec_3\3.2.11\scalatest-featurespec_3-3.2.11.jar;C:\Users\haytr\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scalatest\scalatest-flatspec_3\3.2.11\scalatest-flatspec_3-3.2.11.jar;C:\Users\haytr\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scalatest\scalatest-freespec_3\3.2.11\scalatest-freespec_3-3.2.11.jar;C:\Users\haytr\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scalatest\scalatest-funsuite_3\3.2.11\scalatest-funsuite_3-3.2.11.jar;C:\Users\haytr\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scalatest\scalatest-funspec_3\3.2.11\scalatest-funspec_3-3.2.11.jar;C:\Users\haytr\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scalatest\scalatest-propspec_3\3.2.11\scalatest-propspec_3-3.2.11.jar;C:\Users\haytr\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scalatest\scalatest-refspec_3\3.2.11\scalatest-refspec_3-3.2.11.jar;C:\Users\haytr\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scalatest\scalatest-wordspec_3\3.2.11\scalatest-wordspec_3-3.2.11.jar;C:\Users\haytr\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scalatest\scalatest-diagrams_3\3.2.11\scalatest-diagrams_3-3.2.11.jar;C:\Users\haytr\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scalatest\scalatest-matchers-core_3\3.2.11\scalatest-matchers-core_3-3.2.11.jar;C:\Users\haytr\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scalatest\scalatest-shouldmatchers_3\3.2.11\scalatest-shouldmatchers_3-3.2.11.jar;C:\Users\haytr\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scalatest\scalatest-mustmatchers_3\3.2.11\scalatest-mustmatchers_3-3.2.11.jar;C:\Users\haytr\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scalatest\scalatest-compatible\3.2.11\scalatest-compatible-3.2.11.jar;C:\Users\haytr\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scala-lang\modules\scala-xml_3\2.0.1\scala-xml_3-2.0.1.jar
+[debug] Scala compilation took 0.7099659 s
+[info] done compiling
+[debug] New invalidations:
+[debug] Initial set of included nodes: 
+[debug] Previously invalidated, but (transitively) depend on new invalidations:
+[debug] Final step, transitive dependencies:
+[debug] 	Set()
+[debug] No classes were invalidated.
