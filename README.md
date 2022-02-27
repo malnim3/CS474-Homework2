@@ -3,8 +3,8 @@
 Mashel Al-Nimer <br/>
 malnim3@uic.edu <br/>
 Hello! I have added some new classes to my language. Below I will explain and give examples of how to use the new features.
-### To find my language go to: untitled3\src\main\scala\MySetTheoryLang.scala <br/>
-### To find my test file go to: untitled3\src\test\scala\MyClassTest.scala <br/>
+### To find my language go to: src\main\scala\MySetTheoryLang.scala <br/>
+### To find my test file go to: src\test\scala\MyClassTest.scala <br/>
 
 # How to install
 To create your project, 
