@@ -1,0 +1,37 @@
+[debug] > Exec(test, None, None)
+[debug] Evaluating tasks: Test / test
+[debug] Running task... Cancel: Signal, check cycles: false, forcegc: true
+[info] compiling 1 Scala source to C:\Users\haytr\untitled3\target\scala-3.0.0\test-classes ...
+[info] done compiling
+[info] YourSetTheoryLanguageTest:
+[info] my first language for set theory operations
+[info] - should create a set and insert objects into it
+[info] - should create assign binding
+[info] - should create macro binding
+[info] - should create named scope binding
+[info] - should create anon scope binding
+[info] MyClassTest:
+[info] my first language for set theory operations
+[info] - should testing ClassCall with string intersect0
+[info] - should testing ClassCall with string intersect1
+[info] - should testing ClassCallBool with string intersect0
+[info] - should testing ClassCallBool with string intersect1
+[info] - should testing ClassCallBool with string checkseteven1
+[info] MyHW3Test:
+[info] my first language for set theory operations
+[info] - should testing AbstractClassDef with abstract class name of Someclass
+[info] - should testing AbstractClassDef with abstract class name of SomeAbstractClass even though there is already an existing class with that name
+[info] - should testing ExtendClassDef with class name SomeClass that extends SomeAbstractClass
+[info] - should testing InterfaceDef with string newinter adding abstract class named abstractclass in body
+[info] - should testing CallingClass with class called SomeClass that is trying to call method from SomeAbstractClass *** FAILED ***
+[info]   "Set(1,[ 2, 3, ]404)" was not equal to "Set(1,[2,3,0]404)" (MyHW3Test.scala:26)
+[info] Run completed in 196 milliseconds.
+[info] Total number of tests run: 15
+[info] Suites: completed 3, aborted 0
+[info] Tests: succeeded 14, failed 1, canceled 0, ignored 0, pending 0
+[info] *** 1 TEST FAILED ***
+[error] Failed tests:
+[error] 	MyHW3Test
+[error] (Test / test) sbt.TestsFailedException: Tests unsuccessful
+[error] Total time: 1 s, completed Mar 25, 2022, 8:07:48 PM
+[debug] > Exec(idea-shell, None, None)

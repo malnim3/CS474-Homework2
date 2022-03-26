@@ -51,6 +51,7 @@
 [debug] 	MySetTheoryLang$ArithExp$Basic$.class
 [debug] 	MySetTheoryLang.class
 [debug] 	MySetTheoryLang$ArithExp$ValueSetInt.class
+[debug] 	MySetTheoryLang$DynamicClass.class
 [debug] 	MySetTheoryLang$ArithExp$ValueScopeMacro.class
 [debug] 	MySetTheoryLang$ArithExp$Basic.class
 [debug] 	MySetTheoryLang$ArithExp$ValueScopeNamed$.class
@@ -112,6 +113,7 @@
 [debug] 	MySetTheoryLang$ArithExp$Basic$.tasty
 [debug] 	MySetTheoryLang.tasty
 [debug] 	MySetTheoryLang$ArithExp$ValueSetInt.tasty
+[debug] 	MySetTheoryLang$DynamicClass.tasty
 [debug] 	MySetTheoryLang$ArithExp$ValueScopeMacro.tasty
 [debug] 	MySetTheoryLang$ArithExp$Basic.tasty
 [debug] 	MySetTheoryLang$ArithExp$ValueScopeNamed$.tasty
@@ -174,6 +176,7 @@
 [debug] 	MySetTheoryLang$ArithExp$Basic$.class
 [debug] 	MySetTheoryLang.class
 [debug] 	MySetTheoryLang$ArithExp$ValueSetInt.class
+[debug] 	MySetTheoryLang$DynamicClass.class
 [debug] 	MySetTheoryLang$ArithExp$ValueScopeMacro.class
 [debug] 	MySetTheoryLang$ArithExp$Basic.class
 [debug] 	MySetTheoryLang$ArithExp$ValueScopeNamed$.class
@@ -235,6 +238,7 @@
 [debug] 	MySetTheoryLang$ArithExp$Basic$.tasty
 [debug] 	MySetTheoryLang.tasty
 [debug] 	MySetTheoryLang$ArithExp$ValueSetInt.tasty
+[debug] 	MySetTheoryLang$DynamicClass.tasty
 [debug] 	MySetTheoryLang$ArithExp$ValueScopeMacro.tasty
 [debug] 	MySetTheoryLang$ArithExp$Basic.tasty
 [debug] 	MySetTheoryLang$ArithExp$ValueScopeNamed$.tasty
@@ -297,6 +301,7 @@
 [debug] 	MySetTheoryLang$ArithExp$Basic$.class
 [debug] 	MySetTheoryLang.class
 [debug] 	MySetTheoryLang$ArithExp$ValueSetInt.class
+[debug] 	MySetTheoryLang$DynamicClass.class
 [debug] 	MySetTheoryLang$ArithExp$ValueScopeMacro.class
 [debug] 	MySetTheoryLang$ArithExp$Basic.class
 [debug] 	MySetTheoryLang$ArithExp$ValueScopeNamed$.class
@@ -358,6 +363,7 @@
 [debug] 	MySetTheoryLang$ArithExp$Basic$.tasty
 [debug] 	MySetTheoryLang.tasty
 [debug] 	MySetTheoryLang$ArithExp$ValueSetInt.tasty
+[debug] 	MySetTheoryLang$DynamicClass.tasty
 [debug] 	MySetTheoryLang$ArithExp$ValueScopeMacro.tasty
 [debug] 	MySetTheoryLang$ArithExp$Basic.tasty
 [debug] 	MySetTheoryLang$ArithExp$ValueScopeNamed$.tasty

@@ -1,4 +1,10 @@
-import MySetTheoryLang.CheckSet
+import MySetTheoryLang.ArithExp.{Basic, Union}
+import MySetTheoryLang.{CheckSet, interface}
+
+import scala.language.dynamics
+import reflect.Selectable.reflectiveSelectable
+import language.experimental.macros
+
 
 object MySetTheoryLang:
     type BasicType = Set[Any]
@@ -6,7 +12,247 @@ object MySetTheoryLang:
     var bindingScopingMacro: Map[String, Set[Any]] = Map()
     var bindingScopingScope: Map[String, Set[Any]] = Map()
 
+    //var inherit: Map[String, Set[Any]] = Map()
+    //trait Selectable extends Any
 
+    //Homework 3--------------------------------------------------------------------------------------------------------
+    //Abstract class Storage
+    var abstractClass: Map[String, String] = Map()
+    //Regular class Storage
+    var regularClass: Map[String, String] = Map()
+    //Classes that has key word IMPLEMENTS or EXTENDS Storage
+    var extendImplementClasses: Map[String, String] = Map()
+    //Constructor Storage
+    var constructor: Map[String, String] = Map()
+    //Interface Storage
+    var interface: Map[String, String] = Map()
+    //Field Storage
+    var field: Map[String, List[String]] = Map()
+    //Method Storage
+    var method: Map[String, String] = Map()
+    //Method for each class/interface
+    var classMethod: Map[String, List[String]] = Map()
+
+
+    class DynamicClass extends Dynamic {
+      var map = Map.empty[String, Any]
+
+      def selectDynamic(name: String) = {
+        map get name getOrElse sys.error("method not found")
+      }
+
+      def updateDynamic(name: String)(value: Any) = {
+        map += name -> value
+      }
+      def applyDynamic(name: String)(args: Any*):String = {
+        import  ArithExp.*
+        name.toLowerCase match {
+          case "empty" =>"Set()"
+          case "nonempty" => "Set(1,2,3,4,5,6,7,8,9)"
+          case "constructor" =>  ("Constructor: "+ args.mkString("", " = ", ""))
+          case "method" =>"Default constructor called: default = Set(1,2,3,4,5,6,7,8,9)"
+          case "methname" => ("method name: " + args.mkString("", " method body:  ", ""))
+          case "union" => val tmp = Union(Basic(args(0).asInstanceOf[Set[Any]]), Basic(args(1).asInstanceOf[Set[Any]])).eval; tmp.mkString(",")
+          case "difference" => val tmp = Difference(Basic(args(0).asInstanceOf[Set[Any]]), Basic(args(1).asInstanceOf[Set[Any]])).eval;  tmp.mkString(",")
+        }
+      }
+    }
+
+    //Abstract class with body in method
+    def AbstractClassDef(s: String, fieldMap: List[String], constructorList: List[String] = null, methodList: List[String] = List("defaultMethod")) : String =
+      s match {
+        case s =>
+          if(abstractClass.contains(s)){
+            return "Sorry already have Abstract Class with that name :("
+          }else{
+            //AbstractClass = abstractClass + (s -> fieldMap)
+            val d = new DynamicClass
+            val constKey = constructorList(0)
+            val constValue = constructorList(1)
+            //Saving field of abstract class
+            field = field + (s -> (fieldMap))
+            //println("abstract class: " + field(s))
+            //Creating constructor NOTE: classes can not have same field name otherwise it will we written over here...
+            if(constructorList == null){
+              //Will provide default constructor
+              d.constructor("default", "4")
+              constructor = constructor + ("default" -> "4")
+            }else{
+              //Will add constructor user has set
+              d.constructor(constKey, constValue)
+              constructor = constructor + (constKey -> constValue)
+            }
+            //Adding method
+            if(methodList(0) == "defaultMethod"){
+              //We are leaving this method without body
+              method = method + ("defaultMethod" -> null)
+              classMethod = classMethod + (s -> List("defaultMethod"))
+              d.method()
+            }else{
+              //We will add a body to this method
+              val methName = methodList(0)
+              val methBod = methodList(1)
+              method = method + (methodList(0) -> methodList(1))
+              classMethod = classMethod + (s -> methodList)
+              d.methName(methName, methBod)
+            }
+            abstractClass = abstractClass + (s -> s)
+            return "Saved Abstract Class!"
+          }
+      }
+
+    //Letting classes extend/implements ONLY ONE class/interface
+    def ExtendClassDef(s: String, fieldMap: List[String], constructorList: List[String] = null, methodList: List[String] = List("defaultMethod"), extendClass: List[String] = null) : String =
+      s match {
+        case s =>
+          if(regularClass.contains(s)){
+            return "Sorry already have Class with that name :("
+          }else{
+            val d = new DynamicClass
+            val constKey = constructorList(0)
+            val constValue = constructorList(1)
+            //Saving field of class
+            field = field + (s -> fieldMap)
+            //println("class field: " + field(s))
+            //Creating constructor NOTE: classes can not have same field name otherwise it will we written over here...
+            if(constructorList == null){
+              //Will provide default constructor
+              d.constructor("default", "4")
+              constructor = constructor + ("default" -> "4")
+            }else{
+              //Will add constructor user has set
+              d.constructor(constKey, constValue)
+              constructor = constructor + (constKey -> constValue)
+            }
+            //Adding method
+            val methName = methodList(0)
+            val methBod = methodList(1)
+            if(methodList(0) == "defaultMethod"){
+              //We are leaving this method without body
+              method = method + ("defaultMethod" -> null)
+             // classMethod = classMethod + (s -> List("defaultMethod"))
+              d.method()
+            }else if(methName.toLowerCase == "sum" || methName.toLowerCase == "add"){
+              //Will add a body to this method that is already built in
+            }else{
+              //We will add a body to this method
+              method = method + (methName -> methBod)
+             // classMethod = classMethod + (s -> methodList)
+              d.methName(methName, methBod)
+            }
+            //Checking to see if key word IMPLEMENTS or EXTENDS is valid
+            if (extendClass == null){
+              //Do nothing bc user does not want class to extend anything
+              //println("Does not have extended class")
+            }else if(extendClass(0).toLowerCase == "extends"){
+              //println("In extends if statement")
+              //Check to see if class trying to EXTEND is a valid class
+              if(abstractClass.contains(extendClass(1)) || regularClass.contains(extendClass(1))){
+                extendImplementClasses = extendImplementClasses + (s -> extendClass(1))
+              }else{
+                return "Sorry class is not valid :("
+              }
+              //println("In extends if statement end")
+            }else{
+              //Check to see if interface trying to IMPLEMENT is a valid interface
+              if(interface.contains(extendClass(1))){
+                extendImplementClasses = extendImplementClasses + (s -> extendClass(1))
+              }else{
+                return "Sorry interface is not valid :("
+              }
+            }
+            classMethod = classMethod + (s -> (methodList ::: classMethod(extendClass(1))))
+            regularClass = regularClass + (s -> s)
+            return "Saved Extended Class!"
+          }
+      }
+
+    //Creating interface
+    def InterfaceDef(name: String, fieldList: List[String] = null, constructorList: List[String] = null, methodName: List[String]): String =
+      if(interface.contains(name)){
+        return "Sorry already have Interface with that name :("
+      }else{
+        val d = new DynamicClass
+        val constKey = constructorList(0)
+        val constValue = constructorList(1)
+        //Saving field of class
+        field = field + ((name -> fieldList))
+        println("class field: " + field(name))
+        //Creating constructor NOTE: classes can not have same field name otherwise it will we written over here...
+        if(constructorList == null){
+          //Will provide default constructor
+          d.constructor("default", "4")
+          constructor = constructor + ("default" -> "4")
+        }else{
+          //Will add constructor user has set
+          d.constructor(constKey, constValue)
+          constructor = constructor + (constKey -> constValue)
+        }
+        //Adding method
+        val methName = methodName(0)
+        val methBod = methodName(1)
+        if(methodName(0) == "defaultMethod"){
+          //We are leaving this method without body
+          method = method + ("defaultMethod" -> null)
+          classMethod = classMethod + (name -> List("defaultMethod"))
+          d.method()
+        }else if(methName.toLowerCase == "sum" || methName.toLowerCase == "add"){
+          //Will add a body to this method that is already built in
+        }else{
+          //We will add a body to this method
+          method = method + (methodName(0) -> methodName(1))
+          abstractClass = abstractClass + (methodName(0) -> name)
+          classMethod = classMethod + (name -> methodName)
+          d.methName(methName, methBod)
+        }
+        interface = interface + (name -> name)
+      }
+      return "Saved Interface!"
+
+    //Calling regular class/extended class/implemented class/abstract class/interface
+    def CallingClass(name: String, callingMethod: String, methName: List[Any] = List("","")) : String =
+      if(abstractClass.contains(name)){
+        //send back error if user is trying to call abstract class
+        return "Sorry not allowed to call abstract class"
+      }else if(interface.contains(name)){
+        //send back error if user is trying to call interface
+        return "Sorry not allowed to call interface"
+      }else if(extendImplementClasses.contains(name)){
+        //Make sure the class has access to the functions extended/implemented
+        if(classMethod(name).contains(callingMethod)){
+          val d = new DynamicClass
+          val arg1 = methName(0)
+          val arg2 = methName(1)
+          callingMethod.toLowerCase match{
+            case "empty" => return d.empty()
+            case "nonempty" => return d.nonempty()
+            case "union" => return d.union(arg1, arg2)
+            case "difference" => return d.difference(arg1, arg2)
+            case _ => return d.methName(arg1, arg2)
+          }
+        }else{
+          return "class does not have access to method"
+        }
+      }else{
+        //Can only make calls to whatever was defined in class
+        if(classMethod(name).contains(callingMethod)){
+          val d = new DynamicClass
+          val arg1 = methName(0)
+          val arg2 = methName(1)
+          callingMethod.toLowerCase match{
+            case "empty" => return d.empty()
+            case "nonempty" => return d.nonempty()
+            case "union" => return d.union(arg1, arg2)
+            case "difference" => return d.difference(arg1, arg2)
+            case _ => return d.methName(arg1, arg2)
+          }
+        }else{
+          return "class does not have access to method"
+        }
+      }
+      "Done calling class"
+
+    //Homework 2--------------------------------------------------------------------------------------------------------
     //Virtual Dispatch abstract class-----------------------------------------------------------------------------------
     abstract class VDClass
 
@@ -192,19 +438,19 @@ object MySetTheoryLang:
           //Scope: Create named scope with some value and output the data in terminal
           case Scope(opt1, opt2) =>
             if(bindingScopingScope.contains(opt1.eval2)){
-              return ("Sorry already have Scope with that name :(")
+              return "Sorry already have Scope with that name :("
             }else{
               bindingScopingScope = bindingScopingScope + (opt1.eval2 -> opt2.eval)
-              return ("Saved Scope!")
+              return "Saved Scope!"
             }
 
           //Macro: Set operation that can be referenced by someName
           case Macro(opt1, opt2) =>
             if(bindingScopingMacro.contains(opt1.eval2)){
-              return ("Sorry already have Macro with that name :(")
+              return "Sorry already have Macro with that name :("
             }else{
               bindingScopingMacro = bindingScopingMacro + (opt1.eval2 -> opt2.eval)
-              return ("Saved Macro!")
+              return "Saved Macro!"
             }
         }
 
@@ -220,16 +466,24 @@ object MySetTheoryLang:
       //val firstExpression = Sub(Add(Add(Value(2), Value(3)),Var("Adan")), Var("x")).eval
       val list: Set[Int] = Set(1,2)
       val list2: Set[Int] = Set(4, 5, 6)
-      //println(CheckSet().checkingSet(list.asInstanceOf[Set[Any]], list2.asInstanceOf[Set[Any]]))
-      //println(isInSet().checkingSet(list.asInstanceOf[Set[Any]], list2.asInstanceOf[Set[Any]]))
-      //val car1 = ClassDef("intersect0")
 
-      //val A = new FindIntersect()
-      //println("car1: " + car1.get + " A: " + A)
+      val A = AbstractClassDef("Someclass", List("f"), List("f","2"))
+      //println("a: " + A)
 
-      //println(A.findingIntersect)
-      println(ClassDef("intersect0"))
+      val B = AbstractClassDef("SomeOtherClass", List("g"), List("g", "4"), List("m2", "tmp = 4"))
+      //println("b: " + B)
 
+      val C = AbstractClassDef("Someclass", List("f"), List("f","2"))
+      //println("c: " + C)
+
+      val tmp = (ExtendClassDef("classExtend", List("h"), List("h", "21"), List("difference", "something = 3"), List("extends", "SomeOtherClass")))
+//      println(InterfaceDef("newinter", List("f"), List("f", "23"), List("abstractclass", "whatever = 5")))
+//      println(InterfaceDef("newinter", List("f"), List("f", "23"), List("abstractclass", "whatever = 5")))
+//      println(CallingClass("newinter", ""))
+//      println(CallingClass("Someclass", ""))
+//      println(CallingClass("classExtend", "random"))
+//      println(CallingClass("classExtend", "difference", List(Set(1,2,3),Set(2,3))))
+     //println(CallingClass("classExtend", "m2"))
       //SetMan();
       //SetMan(list.asInstanceOf[Set[Any]], list2.asInstanceOf[Set[Any]]);
       //println("Testing Nested Class: "+ MainClass(Set(1).asInstanceOf[Set[Any]]).checkIfEmpty())
@@ -239,7 +493,3 @@ object MySetTheoryLang:
   //    val thirdExpression = Delete(ValueSetInt(secondExpressiom.asInstanceOf[Set[Int]]), ValueSetInt(list3)).eval
   //    val fourthExpression = Difference(ValueSetInt(secondExpressiom.asInstanceOf[Set[Int]]),ValueSetInt(list3)).eval
   //    val fifthExpression = Difference(ValueSetInt(list3),ValueSetInt(fourthExpression.asInstanceOf[Set[Int]])).eval
-  //    val sixth = SymDifference(ValueSetInt(list),ValueSetInt(fourthExpression.asInstanceOf[Set[Int]])).eval
-
-     // println(car1)
-
