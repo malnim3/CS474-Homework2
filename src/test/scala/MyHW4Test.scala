@@ -16,7 +16,6 @@ class MyHW4Test extends AnyFlatSpec with Matchers{
   }
 
   it should "testing Catch when catch is not defined" in {
-   // val testIntersect = ExtendClassDef("SomeClass", List("h"), List("h", "21"), List("difference", "something = 3"), List("extends", "SomeAbstractClass")) shouldBe "Saved Extended Class!"
     ExceptionClassDef("someOtherName","reason")
     Catch("catch", Set("var"), "reason",Set("Check Fail").asInstanceOf[Set[Any]], "someOtherName") shouldBe "Error...no catch block for given exception"
   }
