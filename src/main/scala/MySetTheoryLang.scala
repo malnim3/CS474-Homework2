@@ -15,6 +15,99 @@ object MySetTheoryLang:
     //var inherit: Map[String, Set[Any]] = Map()
     //trait Selectable extends Any
 
+    //Homework 4--------------------------------------------------------------------------------------------------------
+
+    var exceptionClass: Map[String, String] = Map()
+    var exceptionCatchBlock: Map[String, String] = Map()
+    var throwException: Map[String, String] = Map()
+
+    //IF definition
+    def IF(condition: => Boolean, thenClause: => Any, elseClause: => Any): Any =
+      if condition then thenClause else elseClause
+    end IF
+
+    //ExceptionClassDef definition
+    def ExceptionClassDef(exceptionName: String, reason: String, catchBlock: String = null): String = {
+      if(!exceptionClass.contains(exceptionName)){
+        exceptionClass = exceptionClass + (exceptionName -> reason)
+        if(!exceptionCatchBlock.contains(catchBlock) && catchBlock != null){
+          exceptionCatchBlock = exceptionCatchBlock + (catchBlock -> exceptionName)
+          return "Exception class created"
+        }else{
+          return "Sorry exception binded with name already, try again"
+        }
+      }
+      "Sorry exception class with that name already exists, try again"
+    }
+
+    //ThrowException definition
+    def ThrowException(exceptionName: String, reason: String, valReason: String): String = {
+      //Checking to see if there is a binging between the two strings
+      if(exceptionClass(exceptionName) != reason){
+        return "Wrong reason string for this exception, try again"
+      }
+      //Checking for duplicates
+      if(!throwException.contains(reason)){
+        throwException = throwException + (reason -> valReason)
+      }else{
+        return "Duplicate name, try again"
+      }
+      //println("Exception Thrown")
+      "Exception Thrown"
+    }
+
+    //Help evaluate functions
+    def evaluateFunction(func: String, opt1: Set[Any], opt2: Set[Any]): Set[Any] ={
+      import  ArithExp.*
+      //val opt1 = func(1).toSet.asInstanceOf[Set[Any]]
+      //val opt2 = func(2).toSet.asInstanceOf[Set[Any]]
+      func.toLowerCase() match{
+        case "insert" => Insert(Basic(opt1), Basic(opt2)).eval
+        case "delete" => Delete(Basic(opt1), Basic(opt2)).eval
+        case "intersect" => InterSect(Basic(opt1), Basic(opt2)).eval
+        case "union" => Union(Basic(opt1), Basic(opt2)).eval
+        case "difference" => Difference(Basic(opt1), Basic(opt2)).eval
+        case "symdifference" => SymDifference(Basic(opt1), Basic(opt2)).eval
+      }
+    }
+
+    //CatchException definition supposed to act as the try?
+    def CatchException(exceptionName: String, iffunction: Any, someFunc: String = null, opt1: Set[Any] = null, opt2: Set[Any] = null, catchfunction: Any = null): Any = {
+      //Checking if exception was thrown
+      if(iffunction == "Exception Thrown"){
+        //Checking if exception was caught
+        if(catchfunction == "Exception Caught"){
+          return "CatchException complete"
+        }else{
+          return "Error...could not catch exception"
+        }
+      }else{
+        //Compute functions
+        //println(iffunction.asInstanceOf[Set[Any]])
+        //println(evaluateFunction(iffunction.asInstanceOf[List[String]]))
+        //println("opt1: " + opt1 + "opt2: " + opt2 + "some function: " + someFunc)
+        //if (someFunc != null)
+        evaluateFunction(someFunc,opt1,opt2)
+
+        //println(smtg)
+      }
+      "Exception was not found"
+    }
+
+    //Catch definition supposed to act as the catch
+    def Catch(storage: String, variable: Set[Any], reason: String, reasonVal: Set[Any], exceptionName: String): String = {
+      import  ArithExp.*
+      if(exceptionClass(exceptionName) != reason){
+        return "Wrong field, please try again"
+      }
+      if(exceptionCatchBlock(storage) != exceptionName){
+        return "Error...no catch block for given exception"
+      }
+      Insert(Basic(variable), Basic(reasonVal)).eval
+      //println("Exception Caught")
+      return "Exception Caught"
+    }
+
     //Homework 3--------------------------------------------------------------------------------------------------------
     //Abstract class Storage
     var abstractClass: Map[String, String] = Map()
@@ -489,6 +582,11 @@ object MySetTheoryLang:
       //println("Testing Nested Class: "+ MainClass(Set(1).asInstanceOf[Set[Any]]).checkIfEmpty())
       //println("Testing table----------------")
   //    val list3: Set[Int] = Set(4)
+      val someList = List("var", "reason")
+      ExceptionClassDef("someName","reason", "catch")
+      println(CatchException("someString", IF((3>4), evaluateFunction("difference", Set(1,2,90000), Set(1)),
+        ThrowException("someName","reason", "Check Fail")), "difference", Set(1,2,900).asInstanceOf[Set[Any]], Set(1).asInstanceOf[Set[Any]],
+        Catch("catch", Set("var"), "reason",Set("Check Fail").asInstanceOf[Set[Any]], "someName")))
       //val secondExpressiom = Insert(ValueSetInt(list), ValueSetInt(list2)).eval
   //    val thirdExpression = Delete(ValueSetInt(secondExpressiom.asInstanceOf[Set[Int]]), ValueSetInt(list3)).eval
   //    val fourthExpression = Difference(ValueSetInt(secondExpressiom.asInstanceOf[Set[Int]]),ValueSetInt(list3)).eval

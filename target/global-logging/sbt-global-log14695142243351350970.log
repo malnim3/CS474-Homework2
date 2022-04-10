@@ -1,7 +1,8 @@
-[debug] Running TaskDef(YourSetTheoryLanguageTest, org.scalatest.tools.Framework$$anon$1@4d4eab19, false, [SuiteSelector])
-[debug] Running TaskDef(MyHW3Test, org.scalatest.tools.Framework$$anon$1@4d4eab19, false, [SuiteSelector])
-[debug] Running TaskDef(MyClassTest, org.scalatest.tools.Framework$$anon$1@4d4eab19, false, [SuiteSelector])
-[debug] Running TaskDef(MyHW4Test, org.scalatest.tools.Framework$$anon$1@4d4eab19, false, [SuiteSelector])
+[debug] > Exec(test, None, None)
+[debug] Evaluating tasks: Test / test
+[debug] Running task... Cancel: Signal, check cycles: false, forcegc: true
+[info] compiling 1 Scala source to C:\Users\haytr\untitled3\target\scala-3.0.0\test-classes ...
+[info] done compiling
 [info] MyClassTest:
 [info] my first language for set theory operations
 [info] - should testing ClassCall with string intersect0
@@ -9,13 +10,6 @@
 [info] - should testing ClassCallBool with string intersect0
 [info] - should testing ClassCallBool with string intersect1
 [info] - should testing ClassCallBool with string checkseteven1
-[info] MyHW4Test:
-[info] my first language for set theory operations
-[info] - should testing IF when the IF does not throw an exception
-[info] - should testing IF when If throws an exception
-[info] - should testing Catch when catch is not defined
-[info] - should testing Catch when catch is defined
-[info] - should testing evaluateFunction
 [info] MyHW3Test:
 [info] my first language for set theory operations
 [info] - should testing AbstractClassDef with abstract class name of Someclass
@@ -23,6 +17,13 @@
 [info] - should testing ExtendClassDef with class name SomeClass that extends SomeAbstractClass
 [info] - should testing InterfaceDef with string newinter adding abstract class named abstractclass in body
 [info] - should testing CallingClass with class called SomeClass that is trying to call method from SomeAbstractClass
+[info] MyHW4Test:
+[info] my first language for set theory operations
+[info] - should testing IF when the IF does not throw an exception
+[info] - should testing IF when If throws an exception
+[info] - should testing Catch when catch is not defined
+[info] - should testing Catch when catch is defined
+[info] - should testing evaluateFunction
 [info] YourSetTheoryLanguageTest:
 [info] my first language for set theory operations
 [info] - should create a set and insert objects into it
@@ -30,13 +31,10 @@
 [info] - should create macro binding
 [info] - should create named scope binding
 [info] - should create anon scope binding
-[info] Run completed in 202 milliseconds.
+[info] Run completed in 213 milliseconds.
 [info] Total number of tests run: 20
 [info] Suites: completed 4, aborted 0
 [info] Tests: succeeded 20, failed 0, canceled 0, ignored 0, pending 0
 [info] All tests passed.
-[debug] Passed tests:
-[debug] 	YourSetTheoryLanguageTest
-[debug] 	MyClassTest
-[debug] 	MyHW3Test
-[debug] 	MyHW4Test
+[success] Total time: 1 s, completed Apr 10, 2022, 1:32:06 PM
+[debug] > Exec(idea-shell, None, None)
