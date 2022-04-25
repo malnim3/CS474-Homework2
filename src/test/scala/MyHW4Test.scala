@@ -1,5 +1,5 @@
 import MySetTheoryLang.ArithExp.*
-import MySetTheoryLang.{Catch, CatchException, ExceptionClassDef, IF, ThrowException, evaluateFunction, exceptionClass}
+import MySetTheoryLang.{Catch, CatchException, ExceptionClassDef, IF, ThrowException, evaluateFunction}
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 

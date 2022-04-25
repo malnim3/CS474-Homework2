@@ -1,9 +1,13 @@
 import MySetTheoryLang.ArithExp.{Basic, Union}
 import MySetTheoryLang.{CheckSet, interface}
 
+import java.beans.Expression
 import scala.language.dynamics
 import reflect.Selectable.reflectiveSelectable
 import language.experimental.macros
+import math.Fractional.Implicits.infixFractionalOps
+import math.Integral.Implicits.infixIntegralOps
+import math.Numeric.Implicits.infixNumericOps
 
 
 object MySetTheoryLang:
@@ -14,6 +18,181 @@ object MySetTheoryLang:
 
     //var inherit: Map[String, Set[Any]] = Map()
     //trait Selectable extends Any
+
+    //Homework 5--------------------------------------------------------------------------------------------------------
+    //Partial Evaluation (Step 1)
+    class PartialEval(){
+      import  ArithExp.*
+      def readingString(s: String): String = {
+        s.toLowerCase match {
+          case "+" => "add"
+          case "-" => "sub"
+          case "*" => "mult"
+          case "/" => "div"
+          case "insert" => "insert" //For Insert:
+          case "delete" => "delete" //For Delete:
+          case "intersect" => "intersect" //For Intersect:
+          case "union" => "union" //For Union:
+          case "difference" => "diff" //For Difference:
+          case "symdifference" => "symdiff" //For SymDifference:
+          case "cartesian" => "cart" //For Cartesian:
+          case _ => "var"
+        }
+      }
+
+      def evaluate(left: String, right: String, result: String): String = {
+        if(left == right && result == "mult"){
+          return left.concat("^2")
+        }else if(left == right && result == "div"){
+          return "1"
+        }else if(left == "1" && !right.forall(Character.isDigit) && result == "mult"){
+          return right
+        }else if(right == "1" && !left.forall(Character.isDigit) && result == "mult" ){
+          return left
+        }else if(left == "1" && !right.forall(Character.isDigit) && result == "div"){
+          return left.concat(right)
+        }else if(right == "1" && !left.forall(Character.isDigit) && result == "div" ){
+          return left
+        }else if(left == right && result == "add"){
+          return "2".concat(left)
+        }else if(left == right && result == "sub" ){
+          return ""
+        }
+        "none"
+      }
+
+      def simplify(opt1: List[String]): String = {
+        var result = ""
+        for(i <- 0 until opt1.length - 1){
+          if(opt1(i).forall(Character.isDigit)){
+            //It is digit
+          }else{
+            //It is not a digit so we need to figure out what it is aka call helper function
+            val output = readingString(opt1(i))
+            if(output == "add" || output == "sub" || output == "mult" || output == "div"){
+              val left = opt1(i-1)
+              val right = opt1(i+1)
+              result = result.concat(evaluate(left,right,output))
+            }
+          }
+        }
+        //println(result)
+        result
+      }
+
+      def containsVar(set: Set[Any]): (Set[Any], Set[Any]) = {
+        var result2: Set[Any] = Set()
+        if(set.contains("x")){
+          result2 = Insert(ValueSetString(Set("x")), Basic(result2)).eval
+        }
+        if(set.contains("y")){
+          result2 = Insert(ValueSetString(Set("y")), Basic(result2)).eval
+        }
+        if(set.contains("z")){
+          result2 = Insert(ValueSetString(Set("z")), Basic(result2)).eval
+        }
+        val result1 = Delete(Basic(set), Basic(result2)).eval
+        (result1, result2)
+      }
+
+      def evaluate(s: String, set1: Set[Any], set2:Set[Any]): Set[Any] = {
+        s.toLowerCase match {
+          case "insert" => Insert(Basic(set1), Basic(set2)).eval //For Insert
+          case "delete" => Delete(Basic(set1), Basic(set2)).eval //For Delete
+          case "intersect" => InterSect(Basic(set1), Basic(set2)).eval //For Intersect
+          case "union" => Union(Basic(set1), Basic(set2)).eval //For Union
+          case "diff" => Difference(Basic(set1), Basic(set2)).eval //For Difference
+          case "symdiff" => SymDifference(Basic(set1), Basic(set2)).eval //For SymDifference
+          case "cart" => Cartesian(Basic(set1), Basic(set2)).eval //For Cartesian
+        }
+      }
+
+      //NOTE: unknown variables can only be x,y,z
+      def simplify(exp: String, set1: Set[Any], set2: Set[Any]): (String, Set[Any], Set[Any]) ={
+        val output = readingString(exp)
+        if(output == "insert"){
+          return (exp, evaluate(output, set1, set2), Set())
+        }else if(output == "intersect"){
+          return (exp, evaluate(output, set1, set2), Set())
+        }else if(output == "cart"){
+          return (exp, evaluate(output, set1, set2), Set())
+        }
+        val (output2, output3) = containsVar(set1)
+        val (output4, output5) = containsVar(set2)
+        (exp, evaluate(output, output2, output4), Union(Basic(output3), Basic(output5)).eval)
+      }
+
+    }
+
+    //Monadic Map
+    trait SetExpression[T](s: T):
+      def get: T = s
+      def map[S](f: SetExpression[T] => SetExpression[S]): SetExpression[S]
+
+    //Optimization (Step 2)
+    class Optimize():
+      import  ArithExp.*
+      //For Insert: if set is empty, then return set of what we are trying to insert
+      //NOTE: Assumption is that opt2 is not empty
+      def insert(opt1: Set[Any], opt2: Set[Any]): Set[Any] ={
+        if(opt1.isEmpty){
+          return opt2
+        }
+        Insert(Basic(opt1), Basic(opt2)).eval
+      }
+
+      //For Delete: if set is of length 1 and only element is element we are trying to delete, then return empty set
+      //NOTE: Assumption is that opt2 is actually in the set
+      def delete(opt1: Set[Any], opt2: Set[Any]): Set[Any] = {
+        if(opt1.size == 1){
+          return Set()
+        }
+        Delete(Basic(opt1), Basic(opt2)).eval
+      }
+
+      //For Intersect: if both sets are the same, then we return one of the sets
+      def intersect(opt1: Set[Any], opt2: Set[Any]): Set[Any] = {
+        if(opt1.equals(opt2)){
+          return opt1
+        }
+        InterSect(Basic(opt1), Basic(opt2)).eval
+      }
+
+      //For Union: if both sets are the same, then we return one of the sets
+      def union(opt1: Set[Any], opt2: Set[Any]): Set[Any] = {
+        if(opt1.equals(opt2)){
+          return opt1
+        }
+        Union(Basic(opt1), Basic(opt2)).eval
+      }
+
+      //For Difference: if both sets are the same, then we return empty set
+      def difference(opt1: Set[Any], opt2: Set[Any]): Set[Any] = {
+        if(opt1.equals(opt2)){
+          return Set()
+        }
+        Difference(Basic(opt1), Basic(opt2)).eval
+      }
+
+      //For SymDifference: if 1 set is empty or both sets are the same, then return other set or return empty set
+      def symdifference(opt1: Set[Any], opt2: Set[Any]): Set[Any] = {
+        if(opt1.isEmpty){
+          return opt2
+        }else if(opt2.isEmpty){
+          return opt1
+        }else if(opt1.equals(opt2)){
+          return Set()
+        }
+        SymDifference(Basic(opt1), Basic(opt2)).eval
+      }
+
+      //For Cartesian: if 1 set is empty, then return  empty set
+      def cartesian(opt1: Set[Any], opt2: Set[Any]): Set[Any] = {
+        if(opt1.isEmpty || opt2.isEmpty){
+          return Set()
+        }
+        Cartesian(Basic(opt1), Basic(opt2)).eval
+      }
 
     //Homework 4--------------------------------------------------------------------------------------------------------
 
@@ -570,24 +749,9 @@ object MySetTheoryLang:
       //println("c: " + C)
 
       val tmp = (ExtendClassDef("classExtend", List("h"), List("h", "21"), List("difference", "something = 3"), List("extends", "SomeOtherClass")))
-//      println(InterfaceDef("newinter", List("f"), List("f", "23"), List("abstractclass", "whatever = 5")))
-//      println(InterfaceDef("newinter", List("f"), List("f", "23"), List("abstractclass", "whatever = 5")))
-//      println(CallingClass("newinter", ""))
-//      println(CallingClass("Someclass", ""))
-//      println(CallingClass("classExtend", "random"))
-//      println(CallingClass("classExtend", "difference", List(Set(1,2,3),Set(2,3))))
-     //println(CallingClass("classExtend", "m2"))
-      //SetMan();
-      //SetMan(list.asInstanceOf[Set[Any]], list2.asInstanceOf[Set[Any]]);
-      //println("Testing Nested Class: "+ MainClass(Set(1).asInstanceOf[Set[Any]]).checkIfEmpty())
-      //println("Testing table----------------")
-  //    val list3: Set[Int] = Set(4)
-      val someList = List("var", "reason")
-      ExceptionClassDef("someName","reason", "catch")
-      println(CatchException("someString", IF((3>4), evaluateFunction("difference", Set(1,2,90000), Set(1)),
-        ThrowException("someName","reason", "Check Fail")), "difference", Set(1,2,900).asInstanceOf[Set[Any]], Set(1).asInstanceOf[Set[Any]],
-        Catch("catch", Set("var"), "reason",Set("Check Fail").asInstanceOf[Set[Any]], "someName")))
-      //val secondExpressiom = Insert(ValueSetInt(list), ValueSetInt(list2)).eval
-  //    val thirdExpression = Delete(ValueSetInt(secondExpressiom.asInstanceOf[Set[Int]]), ValueSetInt(list3)).eval
-  //    val fourthExpression = Difference(ValueSetInt(secondExpressiom.asInstanceOf[Set[Int]]),ValueSetInt(list3)).eval
-  //    val fifthExpression = Difference(ValueSetInt(list3),ValueSetInt(fourthExpression.asInstanceOf[Set[Int]])).eval
+
+      //println(PartialEval().simplify(List("x","-","x","x","*","x")))
+      //println(PartialEval().simplify("intersect", Set(1,"2","y","x"), Set("x",1,5)))
+      //println(Set(2).map(e => Optimize().difference(Set(e), Set(2))))
+
+

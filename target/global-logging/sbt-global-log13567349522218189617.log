@@ -1,0 +1,30 @@
+[debug] > Exec(run, None, None)
+[debug] Evaluating tasks: Compile / run
+[debug] Running task... Cancel: Signal, check cycles: false, forcegc: true
+[info] compiling 1 Scala source to C:\Users\haytr\untitled3\target\scala-3.0.0\classes ...
+[warn] -- [E029] Pattern Match Exhaustivity Warning: C:\Users\haytr\untitled3\src\main\scala\MySetTheoryLang.scala:475:8 
+[warn] 475 |        this match {
+[warn]     |        ^^^^
+[warn]     |match may not be exhaustive.
+[warn]     |
+[warn]     |It would fail on pattern case: ArithExp.Assign(_, _), ArithExp.Check(_, _), ArithExp.Macro(_, _), ArithExp.Scope(_, _)
+[warn] -- [E029] Pattern Match Exhaustivity Warning: C:\Users\haytr\untitled3\src\main\scala\MySetTheoryLang.scala:516:8 
+[warn] 516 |        this match{
+[warn]     |        ^^^^
+[warn]     |match may not be exhaustive.
+[warn]     |
+[warn]     |It would fail on pattern case: ArithExp.Basic(_), ArithExp.ValueSetInt(_), ArithExp.ValueSetString(_), ArithExp.ValueSetDoub(_), ArithExp.ValueSetFloat(_), ArithExp.ValueSetChar(_)
+[warn]     |(More unmatched cases are elided)
+[warn] -- [E029] Pattern Match Exhaustivity Warning: C:\Users\haytr\untitled3\src\main\scala\MySetTheoryLang.scala:551:8 
+[warn] 551 |        this match{
+[warn]     |        ^^^^
+[warn]     |match may not be exhaustive.
+[warn]     |
+[warn]     |It would fail on pattern case: ArithExp.Basic(_), ArithExp.ValueSetInt(_), ArithExp.ValueSetString(_), ArithExp.ValueSetDoub(_), ArithExp.ValueSetFloat(_), ArithExp.ValueSetChar(_)
+[warn]     |(More unmatched cases are elided)
+[warn] three warnings found
+[warn] three warnings found
+[info] done compiling
+[debug] Forcing garbage collection...
+[success] Total time: 2 s, completed Apr 10, 2022, 2:05:08 PM
+[debug] > Exec(idea-shell, None, None)

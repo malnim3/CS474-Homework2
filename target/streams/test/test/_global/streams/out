@@ -1,14 +1,22 @@
-[debug] Running TaskDef(YourSetTheoryLanguageTest, org.scalatest.tools.Framework$$anon$1@4d4eab19, false, [SuiteSelector])
-[debug] Running TaskDef(MyHW3Test, org.scalatest.tools.Framework$$anon$1@4d4eab19, false, [SuiteSelector])
-[debug] Running TaskDef(MyClassTest, org.scalatest.tools.Framework$$anon$1@4d4eab19, false, [SuiteSelector])
-[debug] Running TaskDef(MyHW4Test, org.scalatest.tools.Framework$$anon$1@4d4eab19, false, [SuiteSelector])
-[info] MyClassTest:
+[debug] Running TaskDef(MyHW5Test, org.scalatest.tools.Framework$$anon$1@7b89598a, false, [SuiteSelector])
+[debug] Running TaskDef(MyHW4Test, org.scalatest.tools.Framework$$anon$1@7b89598a, false, [SuiteSelector])
+[debug] Running TaskDef(MyHW3Test, org.scalatest.tools.Framework$$anon$1@7b89598a, false, [SuiteSelector])
+[debug] Running TaskDef(MyClassTest, org.scalatest.tools.Framework$$anon$1@7b89598a, false, [SuiteSelector])
+[debug] Running TaskDef(YourSetTheoryLanguageTest, org.scalatest.tools.Framework$$anon$1@7b89598a, false, [SuiteSelector])
+[info] YourSetTheoryLanguageTest:
 [info] my first language for set theory operations
-[info] - should testing ClassCall with string intersect0
-[info] - should testing ClassCall with string intersect1
-[info] - should testing ClassCallBool with string intersect0
-[info] - should testing ClassCallBool with string intersect1
-[info] - should testing ClassCallBool with string checkseteven1
+[info] - should create a set and insert objects into it
+[info] - should create assign binding
+[info] - should create macro binding
+[info] - should create named scope binding
+[info] - should create anon scope binding
+[info] MyHW5Test:
+[info] my first language for set theory operations
+[info] - should testing PartialEval of intersect expression
+[info] - should testing monadic function map
+[info] - should testing PartialEval for multiplication of variable and itself
+[info] - should testing Optimize for union
+[info] - should testing PartialEval of intersect expression, this time the value is y that we are looking for
 [info] MyHW4Test:
 [info] my first language for set theory operations
 [info] - should testing IF when the IF does not throw an exception
@@ -23,20 +31,21 @@
 [info] - should testing ExtendClassDef with class name SomeClass that extends SomeAbstractClass
 [info] - should testing InterfaceDef with string newinter adding abstract class named abstractclass in body
 [info] - should testing CallingClass with class called SomeClass that is trying to call method from SomeAbstractClass
-[info] YourSetTheoryLanguageTest:
+[info] MyClassTest:
 [info] my first language for set theory operations
-[info] - should create a set and insert objects into it
-[info] - should create assign binding
-[info] - should create macro binding
-[info] - should create named scope binding
-[info] - should create anon scope binding
-[info] Run completed in 202 milliseconds.
-[info] Total number of tests run: 20
-[info] Suites: completed 4, aborted 0
-[info] Tests: succeeded 20, failed 0, canceled 0, ignored 0, pending 0
+[info] - should testing ClassCall with string intersect0
+[info] - should testing ClassCall with string intersect1
+[info] - should testing ClassCallBool with string intersect0
+[info] - should testing ClassCallBool with string intersect1
+[info] - should testing ClassCallBool with string checkseteven1
+[info] Run completed in 451 milliseconds.
+[info] Total number of tests run: 25
+[info] Suites: completed 5, aborted 0
+[info] Tests: succeeded 25, failed 0, canceled 0, ignored 0, pending 0
 [info] All tests passed.
 [debug] Passed tests:
-[debug] 	YourSetTheoryLanguageTest
 [debug] 	MyClassTest
 [debug] 	MyHW3Test
 [debug] 	MyHW4Test
+[debug] 	MyHW5Test
+[debug] 	YourSetTheoryLanguageTest
